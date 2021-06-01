@@ -1,3 +1,5 @@
+package Part1_Basics;
+
 // Реализуйте алгоритм сортировки пузырьком для сортировки массива
 public class Task2 {
   private static int LENGTH = 50;
