@@ -16,7 +16,9 @@ public class Main {
 //	Part1_Basics.Task4 p1task4 = new Part1_Basics.Task4();
 
 // Vector in 3D
-	Part2_OOP.Task1.Task1 p2task1 = new Part2_OOP.Task1.Task1();
-	
+//	Part2_OOP.Task1.Task1 p2task1 = new Part2_OOP.Task1.Task1();
+
+//	Generation of random number with weight
+	Part2_OOP.Task2.Task2 p2task2 = new Part2_OOP.Task2.Task2();
   }
 }
