@@ -72,9 +72,10 @@ class MyLinkedListTest {
   @Test
   void removeAtIndex() {
 	int index = 2;
-	int sizeBefore = multipleElementsList.size();
+	MyLinkedList<String> copy = multipleElementsList;
+	int sizeBefore = copy.size();
 	multipleElementsList.remove(index);
-	assertNotEquals(sizeBefore, multipleElementsList.size(), "RemoveAtIndex failed." +
+	assertEquals(sizeBefore - 1, multipleElementsList.size(), "RemoveAtIndex failed." +
 			" MultipleList size is wrong");
 	
 	index = 0;
@@ -112,9 +113,9 @@ class MyLinkedListTest {
   
   @Test
   void get() {
-    assertEquals("Hello",singleElementList.get(0),
+	assertEquals("Hello", singleElementList.get(0),
 			"get failed. It should have returned different value");
-	assertEquals("world",multipleElementsList.get(1),
+	assertEquals("world", multipleElementsList.get(1),
 			"get failed. It should have returned different value");
   }
   
@@ -132,10 +133,14 @@ class MyLinkedListTest {
   
   @Test
   void indexOf() {
+	assertEquals(2, multipleElementsList.indexOf("world"), "indexOf 1 rep failed. ");
+	assertEquals(1,multipleElementsList.indexOf("hello"),"indexOf multiple reps failed");
   }
   
   @Test
   void lastIndexOf() {
+	assertEquals(2, multipleElementsList.lastIndexOf("world"), "lastIndexOf 1 rep failed");
+	assertEquals(4, multipleElementsList.lastIndexOf("hello"), "lastIndexOf multiple reps failed");
   }
   
   @Test

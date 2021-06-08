@@ -139,7 +139,7 @@ public class MyLinkedList<E> implements List {
   @Override
   public int lastIndexOf(Object object) {
 	Entry entry = header;
-	for (int i = size - 1; i > 0; i--) {
+	for (int i = size+1; i > 0; i--) {
 	  if (object.equals(entry.element)) {
 		return i;
 	  }

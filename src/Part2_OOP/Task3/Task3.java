@@ -13,6 +13,7 @@ public class Task3 {
 	linkedList.add("new");
 	linkedList.add("world");
 	linkedList.remove("hello");
+	linkedList.indexOf("hello");
 	printList();
 	
   }
