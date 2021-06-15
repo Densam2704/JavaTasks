@@ -93,7 +93,7 @@ class MyLinkedListTest {
   @Test
   void toArrayWithParam(){
 	String[] strings = new String[multipleElementsList.size()];
-	strings=multipleElementsList.toArray(strings);
+	strings=multipleElementsList.toArray(strings,strings.length);
 	for (int i = 0; i < multipleElementsList.size(); i++) {
 	  assertEquals(multipleElementsList.get(i),strings[i],"toArrayWithParam failed");
 	}

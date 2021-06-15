@@ -1,5 +1,6 @@
 package Part2_OOP.Task3;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class MyLinkedList<E> implements List {
@@ -54,18 +55,47 @@ public class MyLinkedList<E> implements List {
   }
   
   @Override
-  public Object[] toArray(Object[] a) {
-	Object[] objects = new Object[a.length];
-	Entry entry = header;
-	for (int i = 0; i < size; i++) {
-	  entry = entry.next;
-	  objects[i] = (E) (entry.element);
+  @SuppressWarnings("unchecked")
+  public Object[] toArray(Object[] type) {
+	Object result = Array.newInstance(type.getClass(), size());
+	Entry cursor = header;
+	int index = 0;
+	while (cursor != null) {
+	  Array.set(result, index, cursor.element);
+	  cursor = cursor.next;
+	  index++;
 	}
-
-//	return objects;
-	return new Object[size];
+	return (E[]) result;
   }
   
+  public <E> E[] toArray(E[] type, int size) {
+	Object result = Array.newInstance(type.getClass(),size);
+	Entry cursor = header;
+	for (int i = 0; i < size; i++) {
+	  cursor = cursor.next;
+	  Array.set(result,i,(E)cursor.element);
+	}
+	
+	return (E[]) result;
+  }
+//  @Override
+//  @SuppressWarnings("unchecked")
+//  public <E> E[] toArray(E[]a) {
+//	E[] result = (E[])(new Comparable[size()]);
+//
+//	int counter = 0;
+//
+//	Entry cursor = header;
+//	int index = 0;
+//	while (cursor != null ){
+//	  result[index] = (E) cursor.element;
+//	  cursor = cursor.next;
+//	  index++;
+//	}
+//	return result;
+//  }
+
+//  @Override
 //  public <E> E[] toArray(E[] a) {
 //    E objects = new a.getClass()[size];
 //	Entry entry = header;
@@ -76,7 +106,7 @@ public class MyLinkedList<E> implements List {
 //
 //	return objects;
 //  }
-  
+//
 //  public  E[] toArray(E[]a){
 //
 //  }
@@ -217,7 +247,6 @@ public class MyLinkedList<E> implements List {
   public boolean containsAll(Collection c) {
 	return false;
   }
-  
   
   
   //  пробегает по всему списку в поисках элемента с указанным индексом
