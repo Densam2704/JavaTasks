@@ -1,9 +1,6 @@
 package Part2_OOP.Task3;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MyLinkedList<E> implements List {
   private Entry header;
@@ -46,8 +43,43 @@ public class MyLinkedList<E> implements List {
   
   @Override
   public Object[] toArray() {
-	return new Object[0];
+	Object[] objects = new Object[size];
+	Entry entry = header;
+	for (int i = 0; i < size; i++) {
+	  entry = entry.next;
+	  objects[i] = (entry.element);
+	}
+	
+	return objects;
   }
+  
+  @Override
+  public Object[] toArray(Object[] a) {
+	Object[] objects = new Object[a.length];
+	Entry entry = header;
+	for (int i = 0; i < size; i++) {
+	  entry = entry.next;
+	  objects[i] = (E) (entry.element);
+	}
+
+//	return objects;
+	return new Object[size];
+  }
+  
+//  public <E> E[] toArray(E[] a) {
+//    E objects = new a.getClass()[size];
+//	Entry entry = header;
+//	for (int i = 0; i < size; i++) {
+//	  entry = entry.next;
+//	  objects[i] = (E) (entry.element);
+//	}
+//
+//	return objects;
+//  }
+  
+//  public  E[] toArray(E[]a){
+//
+//  }
   
   @Override
   public boolean add(Object o) {
@@ -100,6 +132,14 @@ public class MyLinkedList<E> implements List {
 	return (entry(index).element);
   }
   
+  public E getFirst() {
+	return (entry(0).element);
+  }
+  
+  public E getLast() {
+	return (entry(size).element);
+  }
+  
   
   @Override
   public Object set(int index, Object element) {
@@ -139,7 +179,7 @@ public class MyLinkedList<E> implements List {
   @Override
   public int lastIndexOf(Object object) {
 	Entry entry = header;
-	for (int i = size+1; i > 0; i--) {
+	for (int i = size + 1; i > 0; i--) {
 	  if (object.equals(entry.element)) {
 		return i;
 	  }
@@ -178,10 +218,6 @@ public class MyLinkedList<E> implements List {
 	return false;
   }
   
-  @Override
-  public Object[] toArray(Object[] a) {
-	return new Object[0];
-  }
   
   
   //  пробегает по всему списку в поисках элемента с указанным индексом

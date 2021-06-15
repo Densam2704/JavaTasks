@@ -1,4 +1,4 @@
-import Part2_OOP.Task1.Task1;
+package Main;//import Part2_OOP.Task1.Task1;
 
 public class Main {
   //Задачи с https://habr.com/ru/post/440436/
@@ -19,6 +19,9 @@ public class Main {
 //	Part2_OOP.Task1.Task1 p2task1 = new Part2_OOP.Task1.Task1();
 
 //	Generation of random number with weight
-	Part2_OOP.Task2.Task2 p2task2 = new Part2_OOP.Task2.Task2();
+//	Part2_OOP.Task2.Task2 p2task2 = new Part2_OOP.Task2.Task2();
+
+// Linked list
+	Part2_OOP.Task3.Task3 p2task3 = new Part2_OOP.Task3.Task3();
   }
 }

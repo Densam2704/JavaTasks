@@ -1,5 +1,6 @@
 package Part2_OOP.Task3;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 //Собственная реализация связного списка.
@@ -12,9 +13,13 @@ public class Task3 {
 	linkedList.add("Hello");
 	linkedList.add("new");
 	linkedList.add("world");
-	linkedList.remove("hello");
-	linkedList.indexOf("hello");
-	printList();
+	Object[] stringObjects = linkedList.toArray();
+	System.out.println(Arrays.toString(stringObjects));
+	
+	String[] strings = new String[linkedList.size()];
+	strings=linkedList.toArray(strings);
+	System.out.println(strings[0]);
+	
 	
   }
   

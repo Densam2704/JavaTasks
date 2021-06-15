@@ -4,12 +4,19 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyLinkedListTest {
   private MyLinkedList<String> singleElementList = new MyLinkedList<>();
   private MyLinkedList<String> multipleElementsList = new MyLinkedList<>();
   private MyLinkedList<String> emptyList = new MyLinkedList<>();
+  
+  private LinkedList<String> expectedSingleElementList = new LinkedList<>();
+  private LinkedList<String> expectedMultipleElementsList = new LinkedList<>();
+  private LinkedList<String> expectedEmptyList = new LinkedList<>();
   
   //  @BeforeAll
 //  void initialize() {
@@ -20,11 +27,22 @@ class MyLinkedListTest {
 	singleElementList = new MyLinkedList<>();
 	multipleElementsList = new MyLinkedList<>();
 	emptyList = new MyLinkedList<>();
+	
 	singleElementList.add("Hello");
 	multipleElementsList.add("hello");
 	multipleElementsList.add("world");
 	multipleElementsList.add("hello");
 	multipleElementsList.add("hello");
+	
+	expectedSingleElementList = new LinkedList<>();
+	expectedMultipleElementsList = new LinkedList<>();
+	expectedEmptyList = new LinkedList<>();
+	
+	expectedSingleElementList.add("Hello");
+	expectedMultipleElementsList.add("hello");
+	expectedMultipleElementsList.add("world");
+	expectedMultipleElementsList.add("hello");
+	expectedMultipleElementsList.add("hello");
   }
   
   
@@ -66,17 +84,39 @@ class MyLinkedListTest {
   
   @Test
   void toArray() {
+    Object[] multipleStringsObjects = multipleElementsList.toArray();
+    assertEquals("[hello, world, hello, hello]",Arrays.toString(multipleStringsObjects),"toArray() failed");
+	System.out.println(Arrays.toString(multipleStringsObjects));
+	
+  }
+  
+  @Test
+  void toArrayWithParam(){
+	String[] strings = new String[multipleElementsList.size()];
+	strings=multipleElementsList.toArray(strings);
+	for (int i = 0; i < multipleElementsList.size(); i++) {
+	  assertEquals(multipleElementsList.get(i),strings[i],"toArrayWithParam failed");
+	}
+//	System.out.println(strings[0]);
   }
   
   
   @Test
   void removeAtIndex() {
-	int index = 2;
+	
 	MyLinkedList<String> copy = multipleElementsList;
 	int sizeBefore = copy.size();
+	int index = 2;
 	multipleElementsList.remove(index);
 	assertEquals(sizeBefore - 1, multipleElementsList.size(), "RemoveAtIndex failed." +
 			" MultipleList size is wrong");
+	
+	expectedMultipleElementsList.remove(index);
+	for (int i = 0; i < multipleElementsList.size(); i++) {
+	  assertEquals(expectedMultipleElementsList.get(i), multipleElementsList.get(i), "RemoveAtIndex failed "
+			  + " expected and actual MultipleElementLists do not match");
+	}
+	
 	
 	index = 0;
 	sizeBefore = singleElementList.size();
@@ -113,10 +153,8 @@ class MyLinkedListTest {
   
   @Test
   void get() {
-	assertEquals("Hello", singleElementList.get(0),
-			"get failed. It should have returned different value");
-	assertEquals("world", multipleElementsList.get(1),
-			"get failed. It should have returned different value");
+	assertEquals(expectedSingleElementList.get(0), singleElementList.get(0),
+			"get failed. Expected and actual SingleElementLists do not match");
   }
   
   @Test
@@ -134,7 +172,7 @@ class MyLinkedListTest {
   @Test
   void indexOf() {
 	assertEquals(2, multipleElementsList.indexOf("world"), "indexOf 1 rep failed. ");
-	assertEquals(1,multipleElementsList.indexOf("hello"),"indexOf multiple reps failed");
+	assertEquals(1, multipleElementsList.indexOf("hello"), "indexOf multiple reps failed");
   }
   
   @Test
