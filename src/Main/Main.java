@@ -22,6 +22,9 @@ public class Main {
 //	Part2_OOP.Task2.Task2 p2task2 = new Part2_OOP.Task2.Task2();
 
 // Linked list
-	Part2_OOP.Task3.Task3 p2task3 = new Part2_OOP.Task3.Task3();
+//	Part2_OOP.Task3.Task3 p2task3 = new Part2_OOP.Task3.Task3();
+	
+//Binary search
+	Part3_Recursion.Task1.Task1 p3task1 = new Part3_Recursion.Task1.Task1();
   }
 }
