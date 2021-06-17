@@ -167,7 +167,7 @@ public class MyLinkedList<E> implements List {
   }
   
   public E getLast() {
-	return (entry(size).element);
+	return (entry(size-1).element);
   }
   
   
@@ -199,7 +199,7 @@ public class MyLinkedList<E> implements List {
 	Entry entry = header;
 	for (int i = 0; i < size; i++) {
 	  if (object.equals(entry.element)) {
-		return i;
+		return i-1;
 	  }
 	  entry = entry.next;
 	}
@@ -211,7 +211,7 @@ public class MyLinkedList<E> implements List {
 	Entry entry = header;
 	for (int i = size + 1; i > 0; i--) {
 	  if (object.equals(entry.element)) {
-		return i;
+		return i-1;
 	  }
 	  entry = entry.previous;
 	}
