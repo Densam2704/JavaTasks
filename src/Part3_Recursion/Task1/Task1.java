@@ -1,5 +1,8 @@
 package Part3_Recursion.Task1;
 
+
+import java.util.Arrays;
+
 //Задача:
 //
 //Напишите метод, который проверяет, входит ли в массив заданный элемент или нет.
@@ -9,13 +12,36 @@ public class Task1 {
   private int[] ints = {0, 1, 2, 2, 1, 3, 4, 9, 10, 11, -1, 3, 2, 15};
   private double[] doubles = {0.0, 0.1, -0.3, 0.2};
   
+  private int arrayLength = 100000000;
+  private int range = 1000;
+  private int offset = -500;
+  private double key = 0.0;
+  
   public Task1() {
-	int arrayLength = 1000000000;
-	int range = 1000;
-	int offset = -500;
-	System.out.println("Creating array of " + arrayLength + " doubles for comparing binary search and brute force search");
-	doubles=generateRandomDoubleArray(arrayLength,range,offset);
-	ints=generateRandomIntArray(arrayLength,range,offset);
+	doubles = generateRandomDoubleArray(arrayLength, range, offset);
+	System.out.println("Creating array of " + doubles.length + " doubles for comparing binary search and brute force search");
+	
+	System.out.println("Searching for key = " + key);
+	
+	System.out.println("\nBrute force");
+	long startTime = System.currentTimeMillis();
+	int indexOfKey = Checker.bruteForce(doubles, key);
+	long endTime = System.currentTimeMillis();
+	System.out.println("Brute force took " + (endTime - startTime) + " milliseconds to look for key value");
+	
+	System.out.println("\nBinary search");
+	System.out.println("Binary search requires array to be sorted.\nSorting array.");
+	long sortTime = System.currentTimeMillis();
+	Arrays.sort(doubles);
+	
+	System.out.println("Array was sorted");
+	startTime = System.currentTimeMillis();
+	indexOfKey = Checker.binarySearch(doubles, key);
+	endTime = System.currentTimeMillis();
+	System.out.println("Binary search took " + (endTime - startTime) +
+			" milliseconds to look for key value without considering sort time");
+	System.out.println("Binary search took " + (endTime - sortTime) +
+			" milliseconds to look for key value with considering sort time");
   }
   
   //  Returns random integer array with given length.

@@ -4,10 +4,10 @@ public class Checker {
   public static final int NOT_FOUND = -1;
   
   public static int binarySearch(double[] array, double key) {
-	return NOT_FOUND;
+	return binarySearch(array,key,0,array.length);
   }
   
-  public static int binarySearch(double[]array,double key,int startIndex,int endIndex){
+  private static int binarySearch(double[]array,double key,int startIndex,int endIndex){
 	return NOT_FOUND;
   }
   
