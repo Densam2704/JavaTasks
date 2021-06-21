@@ -15,39 +15,68 @@ public class Task1 {
   private int arrayLength = 100000000;
   private int range = 1000;
   private int offset = -500;
-  private double key = 0.0;
+  private double key;
   
   public Task1() {
 	doubles = generateRandomDoubleArray(arrayLength, range, offset);
 	System.out.println("Creating array of " + doubles.length + " doubles for comparing binary search and brute force search");
+ 
+	for (int i = 0; i < 50; i++) {
+	  
+	  key=doubles[(int)(Math.random()*arrayLength)];
+	  System.out.println("Searching for key = " + key);
+	  doBruteForceSearch();
+	  doBinarySearch();
+	}
+
 	
-	System.out.println("Searching for key = " + key);
-	
-	System.out.println("\nBrute force");
-	long startTime = System.currentTimeMillis();
-	int indexOfKey = Checker.bruteForce(doubles, key);
-	long endTime = System.currentTimeMillis();
-	System.out.println("Brute force took " + (endTime - startTime) + " milliseconds to look for key value");
+  }
+  
+  private int doBinarySearch() {
 	
 	System.out.println("\nBinary search");
 	System.out.println("Binary search requires array to be sorted.\nSorting array.");
-	long sortTime = System.currentTimeMillis();
+	long sortTime = System.nanoTime();
 	Arrays.sort(doubles);
 	
 	System.out.println("Array was sorted");
-	startTime = System.currentTimeMillis();
-	indexOfKey = Checker.binarySearch(doubles, key);
-	endTime = System.currentTimeMillis();
-	System.out.println("Binary search took " + (endTime - startTime) +
-			" milliseconds to look for key value without considering sort time");
-	System.out.println("Binary search took " + (endTime - sortTime) +
-			" milliseconds to look for key value with considering sort time");
+	long startTime = System.nanoTime();
+	int indexOfKey = Checker.binarySearch(doubles, key);
+	long endTime = System.nanoTime();
+	System.out.println("Binary search took " + (double)(endTime -startTime)/1000000000 +
+			" seconds to look for key value without considering sort time");
+	System.out.println("Binary search took " + (double)(endTime - sortTime)/1000000000 +
+			" seconds to look for key value with considering sort time");
+	if (indexOfKey == -1) {
+	  System.out.println("Key was not found");
+	} else {
+	  System.out.println("Key was found");
+	}
+	return indexOfKey;
   }
   
+  private int doBruteForceSearch() {
+  
+	System.out.println("\nBrute force");
+	long startTime = System.nanoTime();
+	int indexOfKey = Checker.bruteForce(doubles, key);
+	long endTime = System.nanoTime();
+	System.out.println("Brute force took " + (double)(endTime - startTime)/1000000000 + " seconds to look for key value");
+	if (indexOfKey == -1) {
+	  System.out.println("Key was not found");
+	} else {
+	  System.out.println("Key was found");
+	}
+	return indexOfKey;
+  }
+  private void generateKey(){
+	System.out.println("Searching for key = " + key);
+	  key = Math.random() * range + offset;
+  }
   //  Returns random integer array with given length.
 //  Random numbers are calculated according to following formula:
 //  randomValue = randomFrom (0,range) + offset.
-  private static int[] generateRandomIntArray(int length, int range, int offset) {
+  public static int[] generateRandomIntArray(int length, int range, int offset) {
 	if (length <= 0) return null;
 	int[] array = new int[length];
 	for (int i = 0; i < length; i++) {
@@ -57,7 +86,7 @@ public class Task1 {
   }
   
   //  Converts array of integers to one string.
-  private static String intArrayToString(int[] array) {
+  public static String intArrayToString(int[] array) {
 	String result = "";
 	for (int i = 0; i < array.length; i++) {
 	  result += array[i] + " ";
@@ -69,7 +98,7 @@ public class Task1 {
   //  Returns random double array with given length.
 //  Random numbers are calculated according to following formula:
 //  randomValue = randomFrom (0,range) + offset.
-  private static double[] generateRandomDoubleArray(int length, double range, double offset) {
+  public static double[] generateRandomDoubleArray(int length, double range, double offset) {
 	if (length <= 0) return null;
 	double[] array = new double[length];
 	for (int i = 0; i < length; i++) {
@@ -79,7 +108,7 @@ public class Task1 {
   }
   
   //  Converts array of doubles to one string.
-  private static String doubleArrayToString(double[] array) {
+  public static String doubleArrayToString(double[] array) {
 	String result = "";
 	for (int i = 0; i < array.length; i++) {
 	  result += array[i] + " ";
