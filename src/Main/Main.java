@@ -28,7 +28,7 @@ public class Main {
 //	Part3_Recursion.Task1.Task1 p3task1 = new Part3_Recursion.Task1.Task1();
 
 //	3.2 Find root using bisection method
-	Part3_Recursion.Task2.Task2 p3task2 = new Part3_Recursion.Task2.Task2();
+//	Part3_Recursion.Task2.Task2 p3task2 = new Part3_Recursion.Task2.Task2();
 //	3.3 Binary search tree
 	Part3_Recursion.Task3.Task3 p3task3 = new Part3_Recursion.Task3.Task3();
   }
