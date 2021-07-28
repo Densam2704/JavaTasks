@@ -38,19 +38,20 @@ public class Tree implements BinarySearchTree {
   private Node insert(Node current, Comparable value, int key) {
 	if (current == null) {
 	  Node newNode = new Node(value, key);
-	  newNode.key = key;
-//	  newNode.parent=current.parent;
 	  return newNode;
 	} else {
-//	  value>current
-	  if (current.data.compareTo(value) < 0) {
+//	  K>X
+	  if (current.key > key) {
 		current.right = insert(current.right, value, key);
 		current.right.parent = current;
 	  }
-//	  value<current
-	  else if (current.data.compareTo(value) > 0) {
+//	  K<X
+	  else if (current.key < key) {
 		current.left = insert(current.left, value, key);
 		current.left.parent = current;
+		//	  K=X
+	  } else if (current.key == key) {
+		current.data = value;
 	  } else
 		return current;
 	}
@@ -59,7 +60,23 @@ public class Tree implements BinarySearchTree {
   
   @Override
   public void remove(int key) {
-	
+	if (root != null) {
+	  if (remove(root, key) == true)
+		System.out.println("Node with key = " + key + " was removed");
+	  else
+		System.out.println("There is no node with key = " + key);
+	}
+  }
+  
+  private boolean remove(Node current, int key) {
+	if (current.key == key) {
+	  if (current.parent.left.key == key)
+	    current.parent.left=null;
+	  if (current.parent.right.key==key)
+	    current.parent.right=null;
+	  return true;
+	}
+	return remove(current.left,key) ||	remove(current.right, key);
   }
   
   public void show(int wayToTraverse) {
@@ -85,12 +102,10 @@ public class Tree implements BinarySearchTree {
   
   private void infix(Node current) {
 	if (current != null) {
-	  System.out.print(" " + current.data);
-	  System.out.println();
-	  infix(current.left);
-	  infix(current.right);
+	  prefix(current.left);
+	  System.out.println("Value: "+current.data+ " Key: "+current.key);
+	  prefix(current.right);
 	}
-	System.out.print(" ");
   }
   
   @Override
@@ -100,9 +115,9 @@ public class Tree implements BinarySearchTree {
   
   private void prefix(Node current) {
 	if (current != null) {
-	  prefix(current.left);
-	  System.out.println(current.data);
-	  prefix(current.right);
+	  System.out.println("Value: "+current.data+ " Key: "+current.key);
+	  infix(current.left);
+	  infix(current.right);
 	}
   }
   
@@ -115,7 +130,7 @@ public class Tree implements BinarySearchTree {
 	if (current != null) {
 	  postfix(current.left);
 	  postfix(current.right);
-	  System.out.println(current.data);
+	  System.out.println("Value: "+current.data+ " Key: "+current.key);
 	}
   }
   
@@ -125,7 +140,7 @@ public class Tree implements BinarySearchTree {
 	private Node left;
 	private Node right;
 	private int key = 0;
-	private final V data;
+	private V data;
 	
 	public Node(V data, int key) {
 	  System.out.println("Created node with data " + data + "  and key " + key);
@@ -135,6 +150,7 @@ public class Tree implements BinarySearchTree {
 	  this.left = null;
 	  this.right = null;
 	}
+	
 	
   }
 }
